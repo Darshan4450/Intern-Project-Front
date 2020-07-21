@@ -1,0 +1,105 @@
+<template>
+    <Page>
+        <ActionBar>
+            <FlexboxLayout
+                android:horizontalAlignment="left" class="nav">
+                <Label class="fas action-image" text.decode="&#xf0c9;" @tap="$refs.drawer.toggleDrawerState()" />
+                <Label :text="'Hello '+user.name+'!'" class="action-label"></Label>
+                <Label class="fas action-image" text.decode="&#xf07a;" @tap="goto('/cart')" />
+            </FlexboxLayout>
+        </ActionBar>
+        <FlexboxLayout>
+        <GridLayout rows="*" height="1500px" style="font-size: 16px">
+            <RadSideDrawer ref="drawer">
+                <StackLayout ~drawerContent backgroundColor="white">
+                    <StackLayout height="100" class="m-t-20"
+                        style="text-align: center; vertical-align: center;">
+                        <Image src="http://192.168.0.106:4050/images/userlogo.png" width="50" />
+                        <Label :text="user.name" class="m-t-10" />
+                    </StackLayout>
+                    <StackLayout style="text-align: center; vertical-align: center;">
+                        <Button text="Home" @tap="goto(user.role === 'owner' ? '/editprofile' : '/categories')" />
+                        <Button text="Your Orders" @tap="goto('/orderhistory')" />
+                        <Button text="Account" @tap="goto('/profile')" />
+                        <Button v-if="user.role === 'owner'" text="Item List" @tap="gotoP('/shopitems')" />
+                        <Button v-if="user.role === 'owner'" text="Add Item" />
+                        <!-- <Label text="Labels" padding="10" />
+                        <Label text="Important" padding="10" />
+                        <Label text="Starred" padding="10" />
+                        <Label text="Sent Mail" padding="10" />
+                        <Label text="Drafts" padding="10" /> -->
+                    </StackLayout>
+                    <Button text="LogOut" class="danger m-t-20" @tap="signOut" />
+                </StackLayout>
+                <StackLayout ~mainContent>
+                    <Label v-if="$store.state.message" :text="$store.state.message" horizontalAlignment="center" class="m-t-10 h3" style="color:green;font-weight:bold"  />
+                    <Frame id="home" v-if="user.role === 'customer'">
+                        <Categories  />
+                    </Frame>
+                    <Frame id="home" v-if="user.role === 'owner'">
+                        <Orders />
+                    </Frame>
+                </StackLayout>
+            </RadSideDrawer>
+        </GridLayout>
+        </FlexboxLayout>
+    </Page>
+</template>
+
+<script>
+import Vue from "nativescript-vue";
+import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
+Vue.use(RadSideDrawer);
+import Categories from "./Categories"
+import Orders from "./Orders"
+import EditProfile from "./EditProfile"
+import { mapActions } from 'vuex'
+    export default {
+        components: { Categories, Orders, EditProfile },
+        data() {
+            return {
+                categories: ["Grocery", "Stationary", "Hardware", "Vegetables/Fruits", "Medicine", "Sports"]
+            };
+        },
+        methods: {
+            ...mapActions(['logout', 'loadShops']),
+            signOut() {
+                this.logout().
+                then((data) => {
+                    this.$navigator.navigate('/login', { clearHistory: true })
+                })
+            },
+            goto(route) {
+                this.$navigator.navigate(route, { frame: 'home' })
+                this.$refs.drawer.closeDrawer()
+            },
+            gotoP(route) {
+                this.$navigator.navigate(route, { frame: 'home', props: { shop: this.user } })
+                this.$refs.drawer.closeDrawer()
+            }
+            // setShop(shop) {
+            //     this.$store.state.Shop.shop = shop
+            //     this.$navigator.navigate('/shopitems')
+            // }
+        },
+        mounted() {
+            // this.$store.state.loading = true
+            // this.loadShops()
+            // .then((data) => {
+            //     this.$store.state.loading = false
+            // })
+        },
+        computed: {
+            user() {
+                return this.$store.state.Auth.user
+            },
+            shops() {
+                return this.$store.state.Shop.shops
+            }
+
+        }
+    };
+</script>
+
+<style>
+</style>

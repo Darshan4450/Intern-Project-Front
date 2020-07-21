@@ -1,0 +1,68 @@
+// NativeScript core theme
+// @see https://docs.nativescript.org/ui/theme
+@import '~@nativescript/theme/css/core.css';
+@import '~@nativescript/theme/css/default.css';
+@import "~nativescript-tailwind/dist/tailwind.css";
+//@import '~@nativescript/theme/blue';
+
+// Override variables here
+
+// Global SCSS styling
+// @see https://docs.nativescript.org/ui/styling
+
+.far {
+    font-family: Font Awesome 5 Free, fa-regular-400;
+    font-weight: 900; 
+}
+
+.fab {
+    font-family: Font Awesome 5 Brands, fa-brands-400;
+    font-weight: 400; 
+}
+
+.fas {
+    font-family: Font Awesome 5 Free, fa-solid-900;
+    font-weight: 900; 
+}
+
+.logo {
+    margin-top: 80;
+}
+.primary {
+    color: #FFFFFF;
+    background-color: #007bff;
+}
+.success {
+    color: #FFFFFF;
+    background-color: #28a745;
+}
+.danger {
+    color: #FFFFFF;
+    background-color: #DC3545;
+}
+.warning {
+    color: #000;
+    background-color: #FFC107;
+}
+.info {
+    color: #FFFFFF;
+    background-color: #17a2b8;
+}
+.action-image {
+    font-size: 24rem;
+    font-weight: 100;
+    vertical-align: middle;
+    
+}
+.action-label {
+    font-size: 20;
+    font-weight: bold;
+    vertical-align: center;
+}
+.nav {
+    width: auto;
+    justify-content: space-between;
+}
+.bold {
+    font-weight: bold;
+}
