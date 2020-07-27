@@ -1,16 +1,23 @@
 <template>
       <StackLayout>
-        <FlexboxLayout class="header">
+        <FlexboxLayout class="header px-1 font-bold mt-4">
           <Label text="Popular Shops" />
-          <Label class="fas" style="color:#28a745;" text.decode="More &#xf054;" @tap="$navigator.navigate('/shoplist', { frame: 'home', props: { category: { name: undefined } } })" />
+          <Label class="fas text-green-600" text.decode="More &#xf054;" @tap="$navigator.navigate('/shoplist', { frame: 'home', props: { category: { name: undefined } } })" />
       </FlexboxLayout>
-  <FlexboxLayout style="margin-left: 5;height:400px">
+  <FlexboxLayout class="pl-1 mt-1">
     <RadListView orientation="horizontal" for="shop in shops">
         <v-template>
-            <FlexboxLayout class="card" @tap="setShop(shop)">
-                <Image stretch="true" class="card-image" :src="'http://192.168.0.106:4050/'+shop.image" /> 
-                <Label class="card-text" :text="shop.name" />
-            </FlexboxLayout>
+            <AbsoluteLayout>
+                <FlexboxLayout class="card border border-gray-400 p-2 mr-2" @tap="setShop(shop)">
+                    <Image :src="baseURL+'/'+shop.image" stretch="true" class="w-64 h-24" />
+                    <Label :text="shop.name" />
+                    <FlexboxLayout class="text-xs">
+                        <Label class="fas text-yellow-600" text.decode="&#xf005;" />
+                        <Label text="3.5" class="bold text-gray-800" />
+                    </FlexboxLayout>
+                </FlexboxLayout>
+                <Label :text="'1.5 km'" top="15" left="15" class="px-2 text-xs rounded-full bg-gray-200" />
+            </AbsoluteLayout>
         </v-template>
     </RadListView>
     </FlexboxLayout>
@@ -18,8 +25,14 @@
 </template>
 
 <script>
+import { baseURL } from "../bootstrap"
 export default {
     props: ['shops'],
+    data() {
+        return {
+            baseURL: baseURL
+        }
+    },
     methods: {
         setShop(shop) {
             this.$navigator.navigate('/shopitems', { frame: "home", props: { shop } })
@@ -31,27 +44,8 @@ export default {
 <style scoped>
 .header {
     justify-content: space-between;
-    margin-top:20px;
-    padding: 5;
-    font-weight: bold;
 }
 .card {
-    width: 600px;
-    height: 400px;
-    margin-right: 5;
-    border-width: 1;
-    border-radius: 5;
-    border-color: #d9d9d9;
-    padding: 5;
-    align-items: flex-start;
     flex-direction: column;
-}
-.card-image {
-    width: 100%;
-    height: 250px;
-}
-.card-text {
-    text-align: center;
-    width: 100%;
 }
 </style>

@@ -2,13 +2,12 @@
   <Page actionBarHidden="true">
     <StackLayout>
       <StackLayout>
-        <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
         <!-- <SearchBar ref="searchBar" hint="Search" /> -->
     </StackLayout>
-    <FlexboxLayout class="header ml-2 mt-16">
+    <FlexboxLayout class="bold px-1 mt-8">
           <Label text="Categories" />
       </FlexboxLayout>
-    <FlexboxLayout style="height:100px" class="ml-2">
+    <FlexboxLayout style="height:100px" class="mt-1 pl-1">
         <RadListView orientation="horizontal" for="c in categories">
             <v-template>
                 <FlexboxLayout class="bg-gray-100 border border-gray-600 rounded-md px-2 mr-2" @tap="shawShops(c)">
@@ -63,7 +62,4 @@ export default {
 </script>
 
 <style scoped>
-.header {
-    font-weight: bold;
-}
 </style>

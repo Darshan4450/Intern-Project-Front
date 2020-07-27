@@ -3,43 +3,38 @@
         <ScrollView>  
             <StackLayout>
                 <Label v-if="user.role === 'owner'" text="Available Items" class="h2" style="text-align:center;margin-top:10" />
-                <Label v-if="user.role === 'customer'" :text="shop.name" class="h2" style="text-align:center;margin-top:10" />
+                <Label v-if="user.role === 'customer'" :text="shop.name" class="h2" style="text-align:center;" />
                 <StackLayout>
-                    <Image src="https://capital-wm.com/wp-content/uploads/2016/09/lots-of-groceries4-1024x683.jpg" width="100" height="100" />
+                    <Image :src="baseURL + '/images/item.jpg'" width="100" height="100" />
                     <!-- <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" /> -->
                 </StackLayout>
                 <StackLayout class="mt-2 px-1">
                       <RadListView pullToRefresh="false" orientation="vertical" for="item in shop.items" height="1000px">
                         <v-template>
                             <FlexboxLayout class="mt-2 h-20">
-                            <FlexboxLayout>
-                                <Image src="https://capital-wm.com/wp-content/uploads/2016/09/lots-of-groceries4-1024x683.jpg"
-                                class="w-32" />
-                            </FlexboxLayout>
-                            <FlexboxLayout class="card w-full px-2 py-1">
                                 <FlexboxLayout>
-                                    <Label :text="item.name" class="text-lg" />
+                                    <Image :src="baseURL + '/images/item.jpg'"
+                                    class="w-32" />
                                 </FlexboxLayout>
-                                <FlexboxLayout class="actions">
-                                    <FlexboxLayout class="card-content">
-                                        <Label :text="'Price: ' + item.price" />
-                                        <Label v-if="user.role === 'owner'" class="far icon" text.decode="&#xf2ed;" />
+                                <FlexboxLayout class="card w-full px-2 py-1">
+                                    <FlexboxLayout>
+                                        <Label :text="item.name" class="text-lg" />
                                     </FlexboxLayout>
-                                    <!-- <FlexboxLayout class="border border-green-500">
-                                        <Label class="fas text-green-500" text.decode="&#xf067;" />
-                                        <Label text="1" class="text-sm" />
-                                        <Label class="fas text-green-500" text.decode="&#xf068;" />
-                                    </FlexboxLayout> -->
-                                    <FlexboxLayout class="border border-green-500 px-1">
-                                        <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
+                                    <FlexboxLayout class="actions">
+                                        <FlexboxLayout class="card-content">
+                                            <Label :text="'₹ ' + item.price" />
+                                            <Label v-if="user.role === 'owner'" class="far icon" text.decode="&#xf2ed;" />
+                                        </FlexboxLayout>
+                                        <FlexboxLayout class="border border-green-500 px-1">
+                                            <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
+                                        </FlexboxLayout>
                                     </FlexboxLayout>
                                 </FlexboxLayout>
-                            </FlexboxLayout>
                             </FlexboxLayout>
                         </v-template>
                     </RadListView>
                 </StackLayout>
-                <Button text="Add Item" @tap="$navigator.navigate('/additem', { frame: 'home' })" class="success" />
+                <Button v-if="user.role === 'owner'" text="Add Item" @tap="$navigator.navigate('/additem', { frame: 'home' })" class="success" />
             </StackLayout>
         </ScrollView>
     </Page>
@@ -47,13 +42,15 @@
 
 <script>
 import Vue from 'nativescript-vue'
+import { baseURL } from '../bootstrap'
 import RadListView from 'nativescript-ui-listview/vue';
 Vue.use(RadListView);
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
     export default {
         props : ['shop'],
         data() {
             return {
+                baseURL: baseURL,
                 message: "You have successfully authenticated. This is where you build your core application functionality."
             };
         },
@@ -67,7 +64,7 @@ import { mapActions } from 'vuex'
             },
             setItem(item) {
                 this.$navigator.navigate('/item', { frame: "home", props: { item } })
-            }
+            },
         },
         mounted() {
             if(this.user.role === 'owner') {
@@ -78,7 +75,7 @@ import { mapActions } from 'vuex'
             user() {
                 return this.$store.state.Auth.user
             },
-
+            
         }
     };
 </script>

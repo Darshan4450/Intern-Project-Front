@@ -5,7 +5,10 @@
                 android:horizontalAlignment="left" class="nav">
                 <Label class="fas action-image" text.decode="&#xf0c9;" @tap="$refs.drawer.toggleDrawerState()" />
                 <Label :text="'Hello '+user.name+'!'" class="action-label"></Label>
-                <Label class="fas action-image" text.decode="&#xf07a;" @tap="goto('/cart')" />
+                <AbsoluteLayout>
+                  <Label class="fas action-image" text.decode="&#xf07a;" @tap="goto('/cart')" />
+                  <Label v-if="order.items.length > 0" :text="order.items.length" class="bg-gray-200 rounded-full py-0 px-1" top="5" left="10" isUserInteractionEnabled="false" />
+                </AbsoluteLayout>
             </FlexboxLayout>
         </ActionBar>
         <FlexboxLayout>
@@ -14,7 +17,7 @@
                 <StackLayout ~drawerContent backgroundColor="white">
                     <StackLayout height="100" class="m-t-20"
                         style="text-align: center; vertical-align: center;">
-                        <Image src="http://192.168.0.106:4050/images/userlogo.png" width="50" />
+                        <Image :src="baseURL+'/images/userlogo.png'" width="50" />
                         <Label :text="user.name" class="m-t-10" />
                     </StackLayout>
                     <StackLayout style="text-align: center; vertical-align: center;">
@@ -32,7 +35,7 @@
                     <Button text="LogOut" class="danger m-t-20" @tap="signOut" />
                 </StackLayout>
                 <StackLayout ~mainContent>
-                    <Label v-if="$store.state.message" :text="$store.state.message" horizontalAlignment="center" class="m-t-10 h3" style="color:green;font-weight:bold"  />
+                    <Label v-if="$store.state.message" :text="$store.state.message" horizontalAlignment="center" class="bold text-green-600 mt-2 text-sm"  />
                     <Frame id="home" v-if="user.role === 'customer'">
                         <Categories  />
                     </Frame>
@@ -51,13 +54,16 @@ import Vue from "nativescript-vue";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 Vue.use(RadSideDrawer);
 import Categories from "./Categories"
+import Cart from "./Cart"
 import Orders from "./Orders"
 import EditProfile from "./EditProfile"
 import { mapActions } from 'vuex'
+import { baseURL } from '../bootstrap'
     export default {
-        components: { Categories, Orders, EditProfile },
+        components: { Categories, Orders, EditProfile, Cart },
         data() {
             return {
+                baseURL: baseURL,
                 categories: ["Grocery", "Stationary", "Hardware", "Vegetables/Fruits", "Medicine", "Sports"]
             };
         },
@@ -95,6 +101,9 @@ import { mapActions } from 'vuex'
             },
             shops() {
                 return this.$store.state.Shop.shops
+            },
+            order() {
+                return this.$store.state.Cart.order
             }
 
         }

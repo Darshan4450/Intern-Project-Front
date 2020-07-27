@@ -3,7 +3,6 @@
     <StackLayout style="margin-top:50">
       <Button text="Get Current Location" @tap="getLocation" />
       <Label :text="latitude" textWrap="true" />
-      
         <TextField hint="Address Line 1" :text="address.line1" />
         <TextField hint="Address Line 2(Optional)" :text="address.line2" />
         <TextField hint="City" :text="address.city" />

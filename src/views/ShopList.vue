@@ -9,7 +9,7 @@
                 <ListView for="shop in shops" height="1200px">
                     <v-template>
                         <FlexboxLayout flexDirection="row" @tap="setShop(shop)">
-                            <Image :src="'http://192.168.0.106:4050/' + shop.image"
+                            <Image :src="baseURL+'/' + shop.image"
                                 class="thumb img-circle" />
                             <Label :text="shop.name" class="" />
                             <!-- <Label :text="shop.location" class="t-12" /> -->
@@ -23,11 +23,12 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { baseURL } from '../bootstrap'
     export default {
         props: ['category'],
         data() {
             return {
-                
+                baseURL: baseURL
             };
         },
         methods: {
