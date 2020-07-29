@@ -56,12 +56,6 @@ import { mapActions, mapGetters } from 'vuex'
         },
         methods: {
             ...mapActions(['logout', 'loadShops', 'addItemToCart']),
-            signOut() {
-                this.logout().
-                then((data) => {
-                    this.$navigator.navigate('/login')
-                })
-            },
             setItem(item) {
                 this.$navigator.navigate('/item', { frame: "home", props: { item } })
             },
@@ -69,6 +63,9 @@ import { mapActions, mapGetters } from 'vuex'
         mounted() {
             if(this.user.role === 'owner') {
                 this.shop = user
+            }
+            if(this.user.role === 'customer') {
+                this.$store.state.Cart.order.shop = this.shop._id
             }
         },
         computed: {

@@ -1,6 +1,8 @@
+import axios from '../bootstrap'
 const Cart = {
     state: {
         order: {
+            shop: '',
             items: [],
             total: 0
         }
@@ -35,6 +37,12 @@ const Cart = {
                     if(i._id === item._id) i.quantity--
                 })
                 state.order.total -= item.price
+            }
+        },
+        resetCart({ state }) {
+            state.order = {
+                items: [],
+                total: 0
             }
         }
     },

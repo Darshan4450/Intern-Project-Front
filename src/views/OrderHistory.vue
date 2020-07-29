@@ -7,17 +7,17 @@
             <v-template>
             <StackLayout class="card">
                 <FlexboxLayout class="card-header">
-                    <Label :text="'Order No.: '+order.id" />
+                    <Label :text="'Order No.: '+order._id" />
                     <Label :text="'Date: '+order.date" />
                 </FlexboxLayout>
-                <StackLayout>
+                <StackLayout v-if="user.role === 'customer'">
                     <Image src="https://img.icons8.com/pastel-glyph/2x/shop.png"
                             class="thumb img-circle" />
                 <Label :text="'Nice Stationary'" style="text-align:center;font-size:18" />
                 </StackLayout>
                 <FlexboxLayout class="card-header">
                     <Button text="View" />
-                    <Label :text="'Total Amount: '+order.amount" />
+                    <Label :text="'Total Amount: '+order.total" />
                     <Button text="Reorder" class="warning" />
                 </FlexboxLayout>
             </StackLayout>
@@ -30,29 +30,27 @@
 </template>
 
 <script>
+import axios from '../bootstrap'
 export default {
     data() {
         return {
-            orders: [
-                {
-                    id: 12354,
-                    date: '2020-05-11',
-                    
-                    amount: 500
-                },
-                {
-                    id: 12354,
-                    date: '2020-05-11',
-                    
-                    amount: 500
-                },
-                {
-                    id: 12354,
-                    date: '2020-05-11',
-                    
-                    amount: 500
-                }
-            ]
+            orders: []
+        }
+    },
+    methods: {
+        getOrders() {
+            axios.get(`/order?shopId=${this.user._id}`)
+            .then((data) => {
+                this.orders = data.data
+            })
+        }
+    },
+    mounted() {
+        this.getOrders()
+    },
+    computed: {
+        user() {
+            return this.$store.state.Auth.user
         }
     }
 }

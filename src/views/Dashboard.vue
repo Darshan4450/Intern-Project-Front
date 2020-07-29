@@ -54,13 +54,12 @@ import Vue from "nativescript-vue";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 Vue.use(RadSideDrawer);
 import Categories from "./Categories"
-import Cart from "./Cart"
 import Orders from "./Orders"
-import EditProfile from "./EditProfile"
 import { mapActions } from 'vuex'
 import { baseURL } from '../bootstrap'
+import socket from '../socket'
     export default {
-        components: { Categories, Orders, EditProfile, Cart },
+        components: { Categories, Orders },
         data() {
             return {
                 baseURL: baseURL,
@@ -98,9 +97,6 @@ import { baseURL } from '../bootstrap'
         computed: {
             user() {
                 return this.$store.state.Auth.user
-            },
-            shops() {
-                return this.$store.state.Shop.shops
             },
             order() {
                 return this.$store.state.Cart.order
