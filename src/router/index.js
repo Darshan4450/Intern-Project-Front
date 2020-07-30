@@ -25,6 +25,7 @@ export const routes = {
     '/address': { component: require("../views/Address.vue").default },
     '/addaddress': { component: require("../views/AddAddress.vue").default },
     '/cart': { component: require("../views/Cart.vue").default },
+    '/orders': { component: require("../views/Orders.vue").default },
     '/orderhistory': { component: require("../views/OrderHistory.vue").default },
     '/checkout': { component: require('../views/CheckOut.vue').default },
     '/trackorder': { component: require('../views/TrackOrder.vue').default }

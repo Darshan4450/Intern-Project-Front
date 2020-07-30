@@ -2,7 +2,7 @@
   <Page actionBarHidden="true">
     <StackLayout class="p-2">
       <Label text="Coming Orders" class="bold text-center" />
-      <FlexboxLayout class="border border-gray-700 rounded mt-2 p-2 bg-gray-100" v-for="(order, index) in orders" :key="index">
+      <FlexboxLayout class="border border-green-700 rounded mt-2 p-2 bg-green-100" v-for="(order, index) in orders" :key="index">
               <!-- <Image src="~/assets/images/youtube-profile.png" class="card-image" /> -->
             <FlexboxLayout @tap="$navigator.navigate('/trackorder', { frame: 'home', props: { order } })" class="card-body w-full" style="justify-content: space-between;">
                 <FlexboxLayout class="card-content">
@@ -10,7 +10,7 @@
                   <Label class="text-xs" :text="order._id" />
                 </FlexboxLayout>
                 <FlexboxLayout class="card-content mt-2">
-                    <Label class="text-green-700" :text="order.status" />
+                    <Label class="text-green-700 capitalize" :text="order.status" />
                     <Label :text="'₹ '+order.total" />
                 </FlexboxLayout>
             </FlexboxLayout>

@@ -16,7 +16,7 @@
                 <Label :text="'Nice Stationary'" style="text-align:center;font-size:18" />
                 </StackLayout>
                 <FlexboxLayout class="card-header">
-                    <Button text="View" />
+                    <Button text="View" @tap="$navigator.navigate('/trackorder', { frame: 'home', props: { order } })" />
                     <Label :text="'Total Amount: '+order.total" />
                     <Button text="Reorder" class="warning" />
                 </FlexboxLayout>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import socket from '../socket'
 import axios from '../bootstrap'
 export default {
     data() {
@@ -39,7 +40,13 @@ export default {
     },
     methods: {
         getOrders() {
-            axios.get(`/order?shopId=${this.user._id}`)
+            let url = ''
+            if(this.user.role === 'owner') {
+                url = `/order?shopId=${this.user._id}`
+            } else {
+                url = `/order?customerId=${this.user._id}`
+            }
+            axios.get(url)
             .then((data) => {
                 this.orders = data.data
             })

@@ -59,7 +59,9 @@ export default {
         }
     },
     mounted() {
-        
+        socket.on(`newOrder/${this.user._id}`, (order) => {
+            this.$navigator.navigate('/trackorder', { frame: 'home', props: { order } })
+        })
     }
 }
 </script>

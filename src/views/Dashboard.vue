@@ -21,7 +21,7 @@
                         <Label :text="user.name" class="m-t-10" />
                     </StackLayout>
                     <StackLayout style="text-align: center; vertical-align: center;">
-                        <Button text="Home" @tap="goto(user.role === 'owner' ? '/editprofile' : '/categories')" />
+                        <Button text="Home" @tap="goto(user.role === 'owner' ? '/orders' : '/categories')" />
                         <Button text="Your Orders" @tap="goto('/orderhistory')" />
                         <Button text="Account" @tap="goto('/profile')" />
                         <Button v-if="user.role === 'owner'" text="Item List" @tap="gotoP('/shopitems')" />
