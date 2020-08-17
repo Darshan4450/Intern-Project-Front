@@ -2,7 +2,7 @@
   <Page actionBarHidden="true">
     <ScrollView>
       <StackLayout class="container">
-        <Image src="~/assets/images/youtube-profile.png" class="img" />
+        <Image :src="baseURL + user.image" class="w-20" />
         <Button v-if="user.role === 'customer'" class="fas" text.decode="&#xf4ff; Edit Profile" @tap="goto('/editprofile')" />
         <Button v-if="user.role === 'owner'" class="fas" text.decode="&#xf54f; Edit Shop Details" @tap="goto('/editprofile')" />
         <Button v-if="user.role === 'customer'" class="far" text.decode="&#xf2b9; Saved Address" @tap="goto('/address')" />
@@ -15,7 +15,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { baseURL } from '../bootstrap'
 export default {
+  data() {
+    return {
+      baseURL: baseURL
+    }
+  },
   methods: {
     ...mapActions(['logout']),
     goto(route) {

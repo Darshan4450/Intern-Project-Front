@@ -1,18 +1,19 @@
 <template>
   <Page actionBarHidden="true">
     <ScrollView>
-      <StackLayout v-if="user.role === 'customer'" class="container">
-        <Image src="~/assets/images/youtube-profile.png" class="img" />
+      <StackLayout v-if="user.role === 'customer'" class="pt-6">
+        <Image :src="user.image" class="w-20" />
+        <Button text="Change Avatar" class="bg-blue-600 text-white" @tap="pickImg" />
         <TextField hint="Name" :text="user.name" v-model="user.name" />
         <TextField hint="Email" :text="user.email" v-model="user.email" />
         <TextField hint="Phone" :text="user.phone" v-model="user.phone" />
         <TextField hint="Password" :text="user.password" v-model="user.password" secure="true" />
-        <Label text="Don't want to change password ? Leave Password field Empty." textWrap="true" class="pass" />
-        <Button text="Save Changes" @tap="updateUser(user)" class="primary" />
-
+        <Label text="Don't want to change password ? Leave Password field Empty." textWrap="true" class="text-center text-xs text-gray-600" />
+        <Button text="Save Changes" @tap="update" class="primary" />
       </StackLayout>
-      <StackLayout v-if="user.role === 'owner'" class="container">
-        <Image src="~/assets/images/youtube-profile.png" class="img" />
+      <StackLayout v-if="user.role === 'owner'" class="pt-6">
+        <Image :src="user.image" class="w-20" />
+        <Button text="Change Avatar" class="bg-blue-600 text-white" @tap="pickImg" />
         <TextField hint="Shop Email (Optional)" :text="user.email" v-model="user.email" keyboardType="email" />
         <TextField hint="Phone" :text="user.phone" v-model="user.phone" keyboardType="phone" />
         <TextField hint="Owner Name" :text="user.owner.name" v-model="user.owner.name" />
@@ -21,27 +22,77 @@
         <TextField hint="Opening time" :text="user.timings.split(',')[0]" keyboardType="datetime"  />
         <TextField hint="Closing time" :text="user.timings.split(',')[1]" keyboardType="datetime" />
         <TextField hint="Password" v-model="user.password" secure="true" />
-        <Label text="Don't want to change password ? Leave Password field Empty." textWrap="true" class="pass" />
+        <Label text="Don't want to change password ? Leave Password field Empty." textWrap="true" class="text-center text-xs text-gray-600" />
         <Button text="Save Changes" @tap="updateShop(user)" class="primary" />
       </StackLayout>
     </ScrollView>
   </Page>
 </template>
 <script>
+
 import { mapActions } from "vuex"
+import * as imagepicker from "nativescript-imagepicker";
+import axios, { baseURL } from '../bootstrap';
 export default {
     data() {
         return {
             user: {
               password: ''
-            }
+            },
+            baseURL: baseURL,
         }
     },
     methods: {
-      ...mapActions(['updateUser', 'updateShop'])
+      ...mapActions(['updateUser', 'updateShop']),
+      
+      pickImg() {
+        let context = imagepicker.create({ mode: "single" })
+        context.authorize()
+        .then(() => {
+          return context.present()
+        })
+        .then((selection) => {
+          selection.forEach((selected) => {
+            let mili = (new Date).getTime()
+            let imgsrc = selected.android.toString()
+            this.user.image = imgsrc
+          })
+        })
+      },
+      update() {
+        if(this.user.image !== this.authuser.image) {
+          let imgsrc = this.user.image
+          var name = imgsrc.substr(imgsrc.lastIndexOf("/") + 1);
+          var bghttp = require("nativescript-background-http");
+          var session = bghttp.session("image-upload");
+          var request = {
+                  url: this.baseURL + '/uploadimage',
+                  method: "POST",
+                  headers: { "Content-Type": "application/octet-stream" },
+                  description: "Uploading " + name
+              }
+          var task = session.uploadFile(imgsrc, request);
+          task.on('error', (e) => console.log(e.response))
+          task.on('responded', (e) => {
+            if(this.authuser.role === 'customer') {
+              this.updateUser({...this.user, image: JSON.parse(e.data)})
+            } else {
+              this.updateShop({...this.user, image: JSON.parse(e.data)})
+            }
+          })
+        }
+        else {
+          if(this.authuser.role === 'customer') {
+            this.updateUser(this.user)
+          } else {
+            this.updateShop(this.user)
+          }
+        }
+      } 
     },
     mounted() {
         this.user = {...this.authuser, ...this.user}
+        this.user.image = this.baseURL + this.user.image
     },
     computed: {
         authuser() {
@@ -52,16 +103,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    padding-top: 100px;
-}
-.img {
-    width: 300px;
-    height: 300px;
-}
-.pass {
-  font-size:10px;
-  text-align: center;
-  color: gray;
-}
 </style>

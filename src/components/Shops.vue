@@ -9,7 +9,7 @@
         <v-template>
             <AbsoluteLayout>
                 <FlexboxLayout class="card border border-gray-400 p-2 mr-2" @tap="setShop(shop)">
-                    <Image :src="baseURL+'/'+shop.image" stretch="true" class="w-64 h-24" />
+                    <Image :src="baseURL+shop.image" stretch="true" class="w-64 h-24" />
                     <Label :text="shop.name" />
                     <FlexboxLayout class="text-xs">
                         <Label class="fas text-yellow-600" text.decode="&#xf005;" />

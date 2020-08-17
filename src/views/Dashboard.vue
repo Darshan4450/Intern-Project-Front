@@ -15,10 +15,13 @@
         <GridLayout rows="*" height="1500px" style="font-size: 16px">
             <RadSideDrawer ref="drawer">
                 <StackLayout ~drawerContent backgroundColor="white">
-                    <StackLayout height="100" class="m-t-20"
-                        style="text-align: center; vertical-align: center;">
-                        <Image :src="baseURL+'/images/userlogo.png'" width="50" />
-                        <Label :text="user.name" class="m-t-10" />
+                    <StackLayout class="mt-8">
+                        <FlexboxLayout style="flex-direction:column;">
+                            <FlexboxLayout class="h-20" style="justify-content:center;">
+                                <Image :src="baseURL+user.image" class="rounded-full w-20" stretch="aspectFill" />
+                            </FlexboxLayout>
+                            <Label :text="user.name" class="text-center bold mt-2" />
+                        </FlexboxLayout>
                     </StackLayout>
                     <StackLayout style="text-align: center; vertical-align: center;">
                         <Button text="Home" @tap="goto(user.role === 'owner' ? '/orders' : '/categories')" />
@@ -26,11 +29,6 @@
                         <Button text="Account" @tap="goto('/profile')" />
                         <Button v-if="user.role === 'owner'" text="Item List" @tap="gotoP('/shopitems')" />
                         <Button v-if="user.role === 'owner'" text="Add Item" />
-                        <!-- <Label text="Labels" padding="10" />
-                        <Label text="Important" padding="10" />
-                        <Label text="Starred" padding="10" />
-                        <Label text="Sent Mail" padding="10" />
-                        <Label text="Drafts" padding="10" /> -->
                     </StackLayout>
                     <Button text="LogOut" class="danger m-t-20" @tap="signOut" />
                 </StackLayout>
@@ -54,10 +52,10 @@ import Vue from "nativescript-vue";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 Vue.use(RadSideDrawer);
 import Categories from "./Categories"
-import Orders from "./Orders"
 import { mapActions } from 'vuex'
 import { baseURL } from '../bootstrap'
 import socket from '../socket'
+import Orders from './Orders.vue';
     export default {
         components: { Categories, Orders },
         data() {

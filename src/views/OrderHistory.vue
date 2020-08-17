@@ -7,18 +7,20 @@
             <v-template>
             <StackLayout class="card">
                 <FlexboxLayout class="card-header">
-                    <Label :text="'Order No.: '+order._id" />
-                    <Label :text="'Date: '+order.date" />
+                    <Label class="text-xs" :text="order._id" />
+                    <Label class="text-xs" :text="formatDate(order.date)" />
                 </FlexboxLayout>
                 <StackLayout v-if="user.role === 'customer'">
-                    <Image src="https://img.icons8.com/pastel-glyph/2x/shop.png"
-                            class="thumb img-circle" />
-                <Label :text="'Nice Stationary'" style="text-align:center;font-size:18" />
+                    <Image :src="baseURL+order.shop.image" class="thumb img-circle" />
+                <Label :text="order.shop.name" class="text-center" />
+                </StackLayout>
+                <StackLayout v-if="user.role === 'owner'">
+                  <Label :text="order.customer.name" class="text-center" />
                 </StackLayout>
                 <FlexboxLayout class="card-header">
                     <Button text="View" @tap="$navigator.navigate('/trackorder', { frame: 'home', props: { order } })" />
-                    <Label :text="'Total Amount: '+order.total" />
-                    <Button text="Reorder" class="warning" />
+                    <Label :text="'₹ '+order.total" />
+                    <Button v-if="user.role === 'customer'" text="Reorder" class="warning" />
                 </FlexboxLayout>
             </StackLayout>
             </v-template>
@@ -31,11 +33,12 @@
 
 <script>
 import socket from '../socket'
-import axios from '../bootstrap'
+import axios, { baseURL } from '../bootstrap'
 export default {
     data() {
         return {
-            orders: []
+            orders: [],
+            baseURL: baseURL
         }
     },
     methods: {
@@ -50,6 +53,10 @@ export default {
             .then((data) => {
                 this.orders = data.data
             })
+        },
+        formatDate(d) {
+            let date = new Date(d)
+            return date.toDateString()
         }
     },
     mounted() {

@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import axios from '../bootstrap'
 import socket from '../socket'
 export default {
@@ -36,6 +37,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['resetCart']),
         checkOut() {
             if(this.mod === 2) {
                 alert({ title: 'Delivery Option', message: 'Please Select Delivery Mode.', okButtonText: "Ok" })
@@ -46,6 +48,7 @@ export default {
                 let order = { ...this.order, customer: this.user._id, modeOfDelivery: mode, deliveryAddress: this.mod === 0 ? this.saddress : '' }
                 if(socket.connected) {
                     socket.emit('placeOrder', order)
+                    this.resetCart()
                 }
             }
         }

@@ -61,6 +61,8 @@ const Auth = {
             axios.put(`/user/${euser._id}`, euser)
             .then((data) => {
                 state.user = data.data
+                let user = JSON.parse(datastorage.getString('user'))
+                datastorage.setString('user', JSON.stringify({...user, image: data.data.image}))
                 rootState.message = 'Updated Successfully.'
                 setTimeout(() => {
                     rootState.message = null

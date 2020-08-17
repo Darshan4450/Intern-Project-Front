@@ -22,7 +22,7 @@
           </FlexboxLayout>
           <Label class="text-center mt-1" :text="'Total: ₹'+order.total" textWrap="true" />
         </StackLayout>
-        <StackLayout class="p-2">
+        <StackLayout class="p-2" v-if="order.status !== 'delivered'">
           <Label class="text-center text-lg" text="Updates" textWrap="true" />
           <FlexboxLayout v-if="user.role === 'owner'" style="justify-content:space-between;" class="py-1">
             <Label class="px-1 text-sm rounded" @tap="inc('accepted')" text="Accepted" :class="percent >= x ? 'bg-green-200 border border-green-500' : ''" />
@@ -39,6 +39,10 @@
           <GridLayout :columns="progress" class="border h-4 mt-2">
             <StackLayout col="0" class="success"></StackLayout>
           </GridLayout>
+        </StackLayout>
+        <StackLayout class="p-2" v-if="order.status === 'delivered'">
+          <Label class="fas text-center text-6xl text-green-600 mt-8" text.decode="&#xf058;" />
+          <Label text="Delivered at 18:34 on April 04" class="text-center mt-2" />
         </StackLayout>
       </StackLayout>
     </ScrollView>

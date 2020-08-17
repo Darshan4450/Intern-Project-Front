@@ -4,7 +4,20 @@
       <StackLayout>
         <!-- <SearchBar ref="searchBar" hint="Search" /> -->
     </StackLayout>
-    <FlexboxLayout class="bold px-1 mt-8">
+    <GridLayout class="h-40 px-1 mt-4">
+      <Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="blue" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">
+        <CarouselItem verticalAlignment="middle">
+            <Image class="rounded" src="~/assets/images/sh1.jpg" stretch="aspectFill" />
+        </CarouselItem>
+        <CarouselItem verticalAlignment="middle">
+            <Image class="rounded" src="~/assets/images/sh2.jpg" stretch="aspectFill" />
+        </CarouselItem>
+        <CarouselItem verticalAlignment="middle">
+            <Image class="rounded" src="~/assets/images/sh3.jpg" stretch="aspectFill" />
+        </CarouselItem>
+    </Carousel>
+    </GridLayout>
+    <FlexboxLayout class="bold px-1 mt-4">
           <Label text="Categories" />
       </FlexboxLayout>
     <FlexboxLayout style="height:100px" class="mt-1 pl-1">
@@ -28,6 +41,8 @@ import RadListView from 'nativescript-ui-listview/vue';
 Vue.use(RadListView);
 import axios from '../bootstrap'
 import Shops from "../components/Shops"
+Vue.registerElement('Carousel', () => require('nativescript-carousel').Carousel);
+Vue.registerElement('CarouselItem', () => require('nativescript-carousel').CarouselItem);
 export default {
     components: { Shops },
     data() {

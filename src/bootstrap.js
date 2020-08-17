@@ -1,5 +1,6 @@
 import axios from 'axios'
-export const baseURL = "http://192.168.0.106:4050"
+//export const baseURL = "https://intern-backend.herokuapp.com"
+export const baseURL = "http://192.168.0.104:4050"
 axios.defaults.baseURL = baseURL
 const datastorage = require('tns-core-modules/application-settings')
 if(datastorage.getString('user') !== undefined) {
