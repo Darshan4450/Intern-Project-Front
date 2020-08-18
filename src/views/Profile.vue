@@ -1,12 +1,12 @@
 <template>
   <Page actionBarHidden="true">
     <ScrollView>
-      <StackLayout class="container">
+      <StackLayout class="pt-6">
         <Image :src="baseURL + user.image" class="w-20" />
-        <Button v-if="user.role === 'customer'" class="fas" text.decode="&#xf4ff; Edit Profile" @tap="goto('/editprofile')" />
-        <Button v-if="user.role === 'owner'" class="fas" text.decode="&#xf54f; Edit Shop Details" @tap="goto('/editprofile')" />
-        <Button v-if="user.role === 'customer'" class="far" text.decode="&#xf2b9; Saved Address" @tap="goto('/address')" />
-        <Button class="fas" text.decode="&#xf095; Contact Us" />
+        <Button v-if="user.role === 'customer'" class="fas" text="Edit Profile" @tap="goto('/editprofile')" />
+        <Button v-if="user.role === 'owner'" class="fas" text="Edit Shop Details" @tap="goto('/editprofile')" />
+        <Button v-if="user.role === 'customer'" class="far" text="Saved Address" @tap="goto('/address')" />
+        <Button class="fas" text="Contact Us" />
         <Button class="danger" text="LogOut" @tap="signOut" />
       </StackLayout>
     </ScrollView>

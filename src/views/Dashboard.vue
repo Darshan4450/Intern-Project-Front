@@ -3,11 +3,11 @@
         <ActionBar>
             <FlexboxLayout
                 android:horizontalAlignment="left" class="nav">
-                <Label text.decode="&#xf0c9;" class="fas" @tap="$refs.drawer.toggleDrawerState()" />
-                <Label :text="'Hello '+user.name+'!'" class="action-label"></Label>
+                <Image class="w-6" src="~/assets/images/menu.png" @tap="$refs.drawer.toggleDrawerState()" />
+                <Label :text="'Hello '+user.name+'!'" class="text-lg bold"></Label>
                 <AbsoluteLayout>
-                  <Label class="fas action-image" text.decode="&#xf07a;" @tap="goto('/cart')" />
-                  <Label v-if="order.items.length > 0" :text="order.items.length" class="bg-gray-200 rounded-full py-0 px-1" top="5" left="10" isUserInteractionEnabled="false" />
+                    <Image class="w-8 mt-3 mr-2" src="~/assets/images/cart.png" @tap="goto('/cart')" />
+                   <Label v-if="order.items.length > 0" :text="order.items.length" class="bg-gray-200 rounded-full py-0 px-1" top="5" left="15" isUserInteractionEnabled="false" />
                 </AbsoluteLayout>
             </FlexboxLayout>
         </ActionBar>

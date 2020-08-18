@@ -18,7 +18,7 @@
                     <Label class="px-4" :text="item.quantity" />
                     <Label class="text-lg px-3 bg-gray-300 rounded-r border-l" text.decode="&#8211;" @tap="decQuantity(item)" />
                   </FlexboxLayout>
-                  <Label class="far text-gray-800" text.decode="&#xf2ed;" @tap="removeItem(item)" />
+                  <Image src="~/assets/images/bin.png" class="w-4" @tap="removeItem(item)" />
                 </FlexboxLayout>
             </FlexboxLayout>
         </StackLayout>

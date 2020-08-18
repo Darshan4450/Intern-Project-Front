@@ -1,8 +1,8 @@
 <template>
     <Page class="page" actionBarHidden="true">
         <GridLayout rows="auto, auto, auto">
-          <StackLayout width="100%">
-                <Image width="100" height="100" class="logo"
+          <StackLayout width="100%" class="pt-8">
+                <Image width="100" height="100"
                     src="~/assets/images/warehouse.png" />
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <Label v-if="$store.state.message" :text="$store.state.message" horizontalAlignment="center" class="m-t-10 h3" style="color:green"  />

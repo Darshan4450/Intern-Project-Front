@@ -41,7 +41,7 @@
           </GridLayout>
         </StackLayout>
         <StackLayout class="p-2" v-if="order.status === 'delivered'">
-          <Label class="fas text-center text-6xl text-green-600 mt-8" text.decode="&#xf058;" />
+          <Image class="w-20 mt-8" src="~/assets/images/correct.png" />
           <Label text="Delivered at 18:34 on April 04" class="text-center mt-2" />
         </StackLayout>
       </StackLayout>

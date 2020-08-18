@@ -2,7 +2,7 @@
       <StackLayout>
         <FlexboxLayout class="header px-1 font-bold mt-4">
           <Label text="Popular Shops" />
-          <Label class="fas text-green-600" text.decode="More &#xf054;" @tap="$navigator.navigate('/shoplist', { frame: 'home', props: { category: { name: undefined } } })" />
+          <Label class="text-xl text-green-600" text.decode="More &#8250;" @tap="$navigator.navigate('/shoplist', { frame: 'home', props: { category: { name: undefined } } })" />
       </FlexboxLayout>
   <FlexboxLayout class="pl-1 mt-1">
     <RadListView orientation="horizontal" for="shop in shops">

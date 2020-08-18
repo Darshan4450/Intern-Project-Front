@@ -1,8 +1,8 @@
 <template>
     <Page class="page" actionBarHidden="true">
         <ScrollView>
-            <StackLayout width="100%">
-                <Image width="100" height="100" class="logo"
+            <StackLayout width="100%" class="pt-8">
+                <Image width="100" height="100"
                     src="~/assets/images/shop.png" />
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <Label text="Shop LogIn Page." horizontalAlignment="center" class="m-t-20 h3" style="color:green"  />

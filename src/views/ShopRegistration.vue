@@ -1,8 +1,8 @@
 <template>
     <Page class="page" actionBarHidden="true">
             <ScrollView width="100%">
-                <StackLayout>
-                  <Image width="100" height="100" style="margin-top:40"
+                <StackLayout class="pt-8">
+                  <Image width="100" height="100"
                     src="~/assets/images/shop.png" />
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <Label text="You Are Registering Your Shop." horizontalAlignment="center" class="m-t-20 h3" style="color:green"  />

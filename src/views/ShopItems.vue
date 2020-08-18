@@ -23,7 +23,7 @@
                                     <FlexboxLayout class="actions">
                                         <FlexboxLayout class="card-content">
                                             <Label :text="'₹ ' + item.price" />
-                                            <Label v-if="user.role === 'owner'" class="far icon" text.decode="&#xf2ed;" />
+                                            <Image src="~/assets/images/bin.png" class="w-4" @tap="removeItem(item)" />
                                         </FlexboxLayout>
                                         <FlexboxLayout class="border border-green-500 px-1">
                                             <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
