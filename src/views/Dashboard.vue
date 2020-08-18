@@ -3,7 +3,7 @@
         <ActionBar>
             <FlexboxLayout
                 android:horizontalAlignment="left" class="nav">
-                <Label class="fas action-image" text.decode="&#xf0c9;" @tap="$refs.drawer.toggleDrawerState()" />
+                <Label text.decode="&#xf0c9;" class="fas" @tap="$refs.drawer.toggleDrawerState()" />
                 <Label :text="'Hello '+user.name+'!'" class="action-label"></Label>
                 <AbsoluteLayout>
                   <Label class="fas action-image" text.decode="&#xf07a;" @tap="goto('/cart')" />

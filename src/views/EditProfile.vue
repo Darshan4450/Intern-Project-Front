@@ -60,7 +60,7 @@ export default {
         })
       },
       update() {
-        if(this.user.image !== this.authuser.image) {
+        if(this.user.image !== this.baseURL + this.authuser.image) {
           let imgsrc = this.user.image
           var name = imgsrc.substr(imgsrc.lastIndexOf("/") + 1);
           var bghttp = require("nativescript-background-http");
