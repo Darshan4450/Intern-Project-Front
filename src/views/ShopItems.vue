@@ -5,7 +5,7 @@
                 <Label v-if="user.role === 'owner'" text="Available Items" class="h2" style="text-align:center;margin-top:10" />
                 <Label v-if="user.role === 'customer'" :text="shop.name" class="h2" style="text-align:center;" />
                 <StackLayout>
-                    <Image :src="baseURL + '/images/item.jpg'" width="100" height="100" />
+                    <Image :src="baseURL + shop.image" width="100" height="100" />
                     <!-- <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" /> -->
                 </StackLayout>
                 <StackLayout class="mt-2 px-1">
@@ -13,20 +13,22 @@
                         <v-template>
                             <FlexboxLayout class="mt-2 h-20">
                                 <FlexboxLayout>
-                                    <Image :src="baseURL + '/images/item.jpg'"
-                                    class="w-32" />
+                                    <Image :src="item.image"
+                                    class="w-32 h-16" />
                                 </FlexboxLayout>
                                 <FlexboxLayout class="card w-full px-2 py-1">
                                     <FlexboxLayout>
-                                        <Label :text="item.name" class="text-lg" />
+                                        <Label :text="item.name" class="text-md" />
                                     </FlexboxLayout>
                                     <FlexboxLayout class="actions">
                                         <FlexboxLayout class="card-content">
                                             <Label :text="'₹ ' + item.price" />
-                                            <Image src="~/assets/images/bin.png" class="w-4" @tap="removeItem(item)" />
                                         </FlexboxLayout>
-                                        <FlexboxLayout class="border border-green-500 px-1">
-                                            <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
+                                        <FlexboxLayout>
+                                            <FlexboxLayout class="border border-green-500 px-1">
+                                                <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
+                                            </FlexboxLayout>
+                                            <Image v-if="user.role === 'owner'" src="~/assets/images/bin.png" class="w-4 ml-4" @tap="removeItem(item)" />
                                         </FlexboxLayout>
                                     </FlexboxLayout>
                                 </FlexboxLayout>
@@ -55,9 +57,12 @@ import { mapActions, mapGetters } from 'vuex'
             };
         },
         methods: {
-            ...mapActions(['logout', 'loadShops', 'addItemToCart']),
-            setItem(item) {
-                this.$navigator.navigate('/item', { frame: "home", props: { item } })
+            ...mapActions(['addItemToCart']),
+            
+        },
+        computed: {
+            user() {
+                return this.$store.state.Auth.user
             },
         },
         mounted() {
@@ -67,12 +72,6 @@ import { mapActions, mapGetters } from 'vuex'
             if(this.user.role === 'customer') {
                 this.$store.state.Cart.order.shop = this.shop._id
             }
-        },
-        computed: {
-            user() {
-                return this.$store.state.Auth.user
-            },
-            
         }
     };
 </script>

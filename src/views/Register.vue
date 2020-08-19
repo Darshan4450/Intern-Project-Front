@@ -1,8 +1,8 @@
 <template>
     <Page class="page" actionBarHidden="true">
         <ScrollView>
-            <StackLayout width="100%" class="pt-8">
-                <Image width="100" height="100"
+            <StackLayout width="100%" class="pt-4">
+                <Image class="mt-20" width="100" height="100"
                     src="~/assets/images/warehouse.png" />
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <StackLayout class="m-t-20">
@@ -32,10 +32,10 @@
             return {
                 message: "You have successfully authenticated. This is where you build your core application functionality.",
                 user: {
-                    name: "Customer 2",
-                    email: "c2@test.com",
-                    password: "Darshan",
-                    phone: "1234567890",
+                    name: "",
+                    email: "",
+                    password: "",
+                    phone: "",
                     role: "customer"
                 }
             };

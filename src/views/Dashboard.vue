@@ -15,7 +15,7 @@
         <GridLayout rows="*" height="1500px" style="font-size: 16px">
             <RadSideDrawer ref="drawer">
                 <StackLayout ~drawerContent backgroundColor="white">
-                    <StackLayout class="mt-8">
+                    <StackLayout class="mt-4">
                         <FlexboxLayout style="flex-direction:column;">
                             <FlexboxLayout class="h-20" style="justify-content:center;">
                                 <Image :src="baseURL+user.image" class="rounded-full w-20" stretch="aspectFill" />
@@ -30,7 +30,7 @@
                         <Button v-if="user.role === 'owner'" text="Item List" @tap="gotoP('/shopitems')" />
                         <Button v-if="user.role === 'owner'" text="Add Item" />
                     </StackLayout>
-                    <Button text="LogOut" class="danger m-t-20" @tap="signOut" />
+                    <Button text="LogOut" class="danger mt-4" @tap="signOut" />
                 </StackLayout>
                 <StackLayout ~mainContent>
                     <Label v-if="$store.state.message" :text="$store.state.message" horizontalAlignment="center" class="bold text-green-600 mt-2 text-sm"  />
@@ -99,7 +99,6 @@ import Orders from './Orders.vue';
             order() {
                 return this.$store.state.Cart.order
             }
-
         }
     };
 </script>

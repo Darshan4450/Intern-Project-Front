@@ -1,8 +1,8 @@
 <template>
     <Page class="page" actionBarHidden="true">
             <ScrollView width="100%">
-                <StackLayout class="pt-8">
-                  <Image width="100" height="100"
+                <StackLayout class="pt-4">
+                  <Image class="mt-20" width="100" height="100"
                     src="~/assets/images/shop.png" />
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <Label text="You Are Registering Your Shop." horizontalAlignment="center" class="m-t-20 h3" style="color:green"  />
@@ -39,16 +39,16 @@
         data() {
             return {
                 shop: {
-                    name: "Shop One",
+                    name: "",
                     email: "",
-                    password: "Darshan",
-                    phone: "1236549870",
+                    password: "",
+                    phone: "",
                     license: "22AAAAA0000A1Z5",
-                    type: "Grocery",
+                    type: "",
                     owner: {
-                        name: "Owner 1",
-                        email: "o1@test.com",
-                        phone: "1478523690",
+                        name: "",
+                        email: "",
+                        phone: "",
                     },
                     otime: "08:00",
                     ctime: "17:00",

@@ -6,9 +6,9 @@
         <StackLayout class="px-2">
           <FlexboxLayout class="mt-4 border-b-2 border-gray-400 py-1" style="flex-direction: column" v-for="item in order.items" :key="item._id">
                 <FlexboxLayout>
-                  <Image class="w-16 rounded-full" :src="baseURL + '/images/item.jpg'" />
+                  <Image class="w-16 rounded-full" :src="item.image" />
                   <FlexboxLayout style="flex-direction: column" class="px-2">
-                    <Label :text="item.name" class="bold text-lg" textWrap="true" />
+                    <Label :text="item.name" class="text-md" />
                     <Label :text="'₹ ' + item.price" />
                   </FlexboxLayout>
                 </FlexboxLayout>

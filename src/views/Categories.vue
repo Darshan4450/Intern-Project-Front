@@ -63,7 +63,7 @@ export default {
             this.$navigator.navigate('/shoplist', { frame: 'home', props: { category: c } })
         },
         loadShops() {
-            axios.get('/shop/get')
+            axios.get('/shop')
             .then((data) => {
                 this.shops = data.data
             })
