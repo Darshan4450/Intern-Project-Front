@@ -12,8 +12,9 @@
                     <Image :src="baseURL+shop.image" stretch="true" class="w-64 h-24" />
                     <Label :text="shop.name" />
                     <FlexboxLayout class="text-xs">
-                        <Label class="fas text-yellow-600" text.decode="&#xf005;" />
-                        <Label text="3.5" class="bold text-gray-800" />
+                        <Image class="w-4 h-4" v-if="shop.rating < 2.5" src="~/assets/images/star-half.png" />
+                        <Image class="w-4 h-4" v-if="shop.rating >= 2.5" src="~/assets/images/star.png" />
+                        <Label :text="shop.rating" class="bold text-gray-800" />
                     </FlexboxLayout>
                 </FlexboxLayout>
                 <Label :text="'1.5 km'" top="15" left="15" class="px-2 text-xs rounded-full bg-gray-200" />

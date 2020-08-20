@@ -23,7 +23,7 @@
         <TextField hint="Closing time" :text="user.timings.split(',')[1]" keyboardType="datetime" />
         <TextField hint="Password" v-model="user.password" secure="true" />
         <Label text="Don't want to change password ? Leave Password field Empty." textWrap="true" class="text-center text-xs text-gray-600" />
-        <Button text="Save Changes" @tap="updateShop(user)" class="primary" />
+        <Button text="Save Changes" @tap="update" class="primary" />
       </StackLayout>
     </ScrollView>
   </Page>

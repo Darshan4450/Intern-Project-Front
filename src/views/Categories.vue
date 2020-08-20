@@ -15,7 +15,7 @@
         <CarouselItem verticalAlignment="middle">
             <Image class="rounded" src="~/assets/images/sh3.jpg" stretch="aspectFill" />
         </CarouselItem>
-    </Carousel>
+        </Carousel>
     </GridLayout>
     <FlexboxLayout class="bold px-1 mt-4">
           <Label text="Categories" />
@@ -48,12 +48,12 @@ export default {
     data() {
         return {
             categories: [
-                { name: "Groceries", image: "~/assets/images/grocery.png" },
-                { name: "Stationeries", image: "~/assets/images/stationery.png" },
+                { name: "Grocery", image: "~/assets/images/grocery.png" },
+                { name: "Stationery", image: "~/assets/images/stationery.png" },
                 { name: "Hardware", image: "~/assets/images/hardware.png" },
-                { name: "Vegetables/Fruits", image: "~/assets/images/veges.png" },
-                { name: "Medicines", image: "~/assets/images/medicine.png" },
-                { name: "Sports", image: "~/assets/images/sport.png" }
+                { name: "Vegetable/Fruit", image: "~/assets/images/veges.png" },
+                { name: "Medicine", image: "~/assets/images/medicine.png" },
+                { name: "Sport", image: "~/assets/images/sport.png" }
             ],
             shops: [],
         };
@@ -66,6 +66,7 @@ export default {
             axios.get('/shop')
             .then((data) => {
                 this.shops = data.data
+                this.shops = this.shops.slice(0, 4)
             })
         }
     },

@@ -4,9 +4,9 @@
                 <StackLayout class="pt-4">
                   <Image class="mt-20" width="100" height="100"
                     src="~/assets/images/shop.png" />
-                <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
-                <Label text="You Are Registering Your Shop." horizontalAlignment="center" class="m-t-20 h3" style="color:green"  />
-                <StackLayout class="m-t-20">
+                <Label text="Application" horizontalAlignment="center" class="mt-2 h2"  />
+                <Label text="You Are Registering Your Shop." horizontalAlignment="center" class="mt-2 h3" style="color:green"  />
+                <StackLayout class="mt-2">
                     <TextField v-model="shop.name" hint="Shop Name" />
                     <TextField v-model="shop.email" hint="Shop Email (Optional)" keyboardType="email" />
                     <TextField v-model="shop.license" hint="License: GST No., etc." />
@@ -41,7 +41,7 @@
                 shop: {
                     name: "",
                     email: "",
-                    password: "",
+                    password: "Darshan",
                     phone: "",
                     license: "22AAAAA0000A1Z5",
                     type: "",
@@ -55,15 +55,18 @@
                     location: "23.0000,22.0000",
                     workingdays: "monday,friday",
                 },
-                categories: ["Grocery", "Hardware", "Sports", "Toys", "Furniture", "Vegetables/Fruits", "Stationary"]
             };
         },
         methods: {
             ...mapActions(['addShop']),
             signUp() {
                 this.shop.timings = this.shop.otime + "," + this.shop.ctime
+                this.$store.state.loading = true
                 this.addShop(this.shop)
-                this.$navigator.navigate('/shoplogin')
+                .then(() => {
+                    this.$navigator.navigate('/shoplogin')
+                    this.$store.state.loading = false
+                })
             }
         }
     };

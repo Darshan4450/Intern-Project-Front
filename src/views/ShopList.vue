@@ -9,7 +9,7 @@
                 <ListView for="shop in shops" height="1200px">
                     <v-template>
                         <FlexboxLayout flexDirection="row" @tap="setShop(shop)">
-                            <Image :src="baseURL+'/' + shop.image"
+                            <Image :src="baseURL + shop.image"
                                 class="thumb img-circle" />
                             <Label :text="shop.name" class="" />
                             <!-- <Label :text="shop.location" class="t-12" /> -->

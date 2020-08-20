@@ -6,15 +6,14 @@
                 <Label v-if="user.role === 'customer'" :text="shop.name" class="h2" style="text-align:center;" />
                 <StackLayout>
                     <Image :src="baseURL + shop.image" width="100" height="100" />
-                    <!-- <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" /> -->
+                    <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" />
                 </StackLayout>
                 <StackLayout class="mt-2 px-1">
                       <RadListView pullToRefresh="false" orientation="vertical" for="item in shop.items" height="1000px">
                         <v-template>
                             <FlexboxLayout class="mt-2 h-20">
                                 <FlexboxLayout>
-                                    <Image :src="item.image"
-                                    class="w-32 h-16" />
+                                    <Image :src="item.image" class="w-32 h-16" />
                                 </FlexboxLayout>
                                 <FlexboxLayout class="card w-full px-2 py-1">
                                     <FlexboxLayout>
@@ -26,9 +25,9 @@
                                         </FlexboxLayout>
                                         <FlexboxLayout>
                                             <FlexboxLayout class="border border-green-500 px-1">
-                                                <Label class="text-sm text-green-700 bold" text="ADD" @tap="addItemToCart(item)" />
+                                                <Label class="text-sm text-green-700 bold" text="ADD" />
                                             </FlexboxLayout>
-                                            <Image v-if="user.role === 'owner'" src="~/assets/images/bin.png" class="w-4 ml-4" @tap="removeItem(item)" />
+                                            <Image v-if="user.role === 'owner'" src="~/assets/images/bin.png" class="w-4 ml-4" />
                                         </FlexboxLayout>
                                     </FlexboxLayout>
                                 </FlexboxLayout>
