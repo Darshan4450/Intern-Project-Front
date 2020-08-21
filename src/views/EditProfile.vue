@@ -2,7 +2,7 @@
   <Page actionBarHidden="true">
     <ScrollView>
       <StackLayout v-if="user.role === 'customer'" class="pt-6">
-        <Image :src="user.image" class="w-20" />
+        <Image :src="user.image" class="rounded-full w-20 h-20" stretch="aspectFill" />
         <Button text="Change Avatar" class="bg-blue-600 text-white" @tap="pickImg" />
         <TextField hint="Name" :text="user.name" v-model="user.name" />
         <TextField hint="Email" :text="user.email" v-model="user.email" />
@@ -12,7 +12,7 @@
         <Button text="Save Changes" @tap="update" class="primary" />
       </StackLayout>
       <StackLayout v-if="user.role === 'owner'" class="pt-6">
-        <Image :src="user.image" class="w-20" />
+        <Image :src="user.image" class="rounded-full w-20 h-20" stretch="aspectFill" />
         <Button text="Change Avatar" class="bg-blue-600 text-white" @tap="pickImg" />
         <TextField hint="Shop Email (Optional)" :text="user.email" v-model="user.email" keyboardType="email" />
         <TextField hint="Phone" :text="user.phone" v-model="user.phone" keyboardType="phone" />

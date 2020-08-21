@@ -5,14 +5,21 @@
                 <Label text="Application" horizontalAlignment="center" class="m-t-20 h2"  />
                 <!-- <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" /> -->
             </StackLayout>
-                <StackLayout style="margin-top:100px">
+                <StackLayout class="mt-8">
                 <ListView for="shop in shops" height="1200px">
                     <v-template>
-                        <FlexboxLayout flexDirection="row" @tap="setShop(shop)">
-                            <Image :src="baseURL + shop.image"
-                                class="thumb img-circle" />
-                            <Label :text="shop.name" class="" />
-                            <!-- <Label :text="shop.location" class="t-12" /> -->
+                        <FlexboxLayout flexDirection="row" @tap="setShop(shop)" class="py-4">
+                            <FlexboxLayout class="p-1">
+                                <Image :src="baseURL + shop.image" stretch="aspectFill" class="w-10 h-10 rounded-full" />
+                            </FlexboxLayout>
+                            <FlexboxLayout flexDirection="column" class="px-2">
+                                <Label :text="shop.name" class="p-0" />
+                                <FlexboxLayout class="text-xs">
+                                    <Image class="w-4 h-4" v-if="shop.rating < 3.0" src="~/assets/images/star-half.png" />
+                                    <Image class="w-4 h-4" v-else src="~/assets/images/star.png" />
+                                    <Label :text="shop.rating" class="bold text-gray-800" />
+                                </FlexboxLayout>
+                            </FlexboxLayout>
                         </FlexboxLayout>
                     </v-template>
                 </ListView>

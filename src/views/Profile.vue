@@ -2,7 +2,7 @@
   <Page actionBarHidden="true">
     <ScrollView>
       <StackLayout class="pt-6">
-        <Image :src="baseURL + user.image" class="w-20" />
+        <Image :src="baseURL + user.image" class="rounded-full w-20 h-20" stretch="aspectFill" />
         <Button v-if="user.role === 'customer'" class="fas" text="Edit Profile" @tap="goto('/editprofile')" />
         <Button v-if="user.role === 'owner'" class="fas" text="Edit Shop Details" @tap="goto('/editprofile')" />
         <Button v-if="user.role === 'customer'" class="far" text="Saved Address" @tap="goto('/address')" />

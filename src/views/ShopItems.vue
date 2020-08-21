@@ -2,10 +2,10 @@
     <Page actionBarHidden="true">
         <ScrollView>  
             <StackLayout>
-                <Label v-if="user.role === 'owner'" text="Available Items" class="h2" style="text-align:center;margin-top:10" />
-                <Label v-if="user.role === 'customer'" :text="shop.name" class="h2" style="text-align:center;" />
+                <Label v-if="user.role === 'owner'" text="Available Items" class="mt-4 text-center text-lg" />
+                <Label v-if="user.role === 'customer'" :text="shop.name" class="mt-4 text-center text-lg" />
                 <StackLayout>
-                    <Image :src="baseURL + shop.image" width="100" height="100" />
+                    <Image :src="baseURL + shop.image" class="mt-4 rounded-full w-20 h-20" stretch="aspectFill" />
                     <SearchBar id="searchBar" hint="Search" text="" clear="onClear" submit="onSubmit" />
                 </StackLayout>
                 <StackLayout class="mt-2 px-1">
@@ -24,7 +24,7 @@
                                             <Label :text="'₹ ' + item.price" />
                                         </FlexboxLayout>
                                         <FlexboxLayout>
-                                            <FlexboxLayout class="border border-green-500 px-1">
+                                            <FlexboxLayout class="border border-green-500 px-1" @tap="addItemToCart(item)">
                                                 <Label class="text-sm text-green-700 bold" text="ADD" />
                                             </FlexboxLayout>
                                             <Image v-if="user.role === 'owner'" src="~/assets/images/bin.png" class="w-4 ml-4" />

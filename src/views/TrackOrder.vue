@@ -13,11 +13,11 @@
         <StackLayout class="border border-gray-500 rounded p-2 mt-4">
           <FlexboxLayout class="border-b border-b-gray-100 mt-2" style="flex-direction: column" v-for="(item, index) in order.items" :key="index">
             <FlexboxLayout style="justify-content:space-between;">
-              <Label :text="item.name" textWrap="true" />
-              <Label :text="'₹'+item.price" textWrap="true" />
+              <Label :text="item.name" />
             </FlexboxLayout>
-            <FlexboxLayout>
-              <Label :text="' x'+item.quantity" textWrap="true" />
+            <FlexboxLayout justifyContent="space-between">
+              <Label :text="'₹'+item.price" />
+              <Label :text="' x'+item.quantity" />
             </FlexboxLayout>
           </FlexboxLayout>
           <Label class="text-center mt-1" :text="'Total: ₹'+order.total" textWrap="true" />

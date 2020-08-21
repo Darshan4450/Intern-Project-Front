@@ -9,15 +9,15 @@
         <v-template>
             <AbsoluteLayout>
                 <FlexboxLayout class="card border border-gray-400 p-2 mr-2" @tap="setShop(shop)">
-                    <Image :src="baseURL+shop.image" stretch="true" class="w-64 h-24" />
+                    <Image :src="baseURL+shop.image" stretch="aspectFill" class="w-64 h-24" />
                     <Label :text="shop.name" />
                     <FlexboxLayout class="text-xs">
-                        <Image class="w-4 h-4" v-if="shop.rating < 2.5" src="~/assets/images/star-half.png" />
-                        <Image class="w-4 h-4" v-if="shop.rating >= 2.5" src="~/assets/images/star.png" />
+                        <Image class="w-4 h-4" v-if="shop.rating < 3.0" src="~/assets/images/star-half.png" />
+                        <Image class="w-4 h-4" v-if="shop.rating >= 3.0" src="~/assets/images/star.png" />
                         <Label :text="shop.rating" class="bold text-gray-800" />
                     </FlexboxLayout>
                 </FlexboxLayout>
-                <Label :text="'1.5 km'" top="15" left="15" class="px-2 text-xs rounded-full bg-gray-200" />
+                <Label :text="'1.5 km'" top="15" left="15" class="px-2 text-xs rounded-lg bg-gray-200" />
             </AbsoluteLayout>
         </v-template>
     </RadListView>
