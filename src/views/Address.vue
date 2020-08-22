@@ -10,6 +10,7 @@
               <Label :text="'Line 2: '+address.split(',')[1]" />
               <Label :text="'City: '+address.split(',')[2]" />
               <Label :text="'Pincode: '+address.split(',')[3]" />
+              
             </StackLayout>
           </v-template>
         </ListView>

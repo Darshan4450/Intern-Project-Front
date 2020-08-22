@@ -10,11 +10,11 @@ const Auth = {
         register({state, rootState}, user) {
             return axios.post('/register', user)
             .then((data) => {
-                console.log(data)
-                rootState.message = 'Registered. Try to Login.'
+                rootState.message = 'Welcome ' + data.data.name
                 setTimeout(() => {
                     rootState.message = null
                 }, 5000);
+                return data.data
             })
         },
         login({state}, user) {
@@ -52,6 +52,8 @@ const Auth = {
             .then((data) => {
                 rootState.message = 'Address Successfully Saved.'
                 state.user.addresses.push(address)
+                let user = JSON.parse(datastorage.getString('user'))
+                datastorage.setString('user', JSON.stringify({...state.data, token: user.token}))
                 setTimeout(() => {
                     rootState.message = null
                 }, 5000);
@@ -61,12 +63,12 @@ const Auth = {
             axios.put(`/user/${euser._id}`, euser)
             .then((data) => {
                 state.user = data.data
-                let user = JSON.parse(datastorage.getString('user'))
-                datastorage.setString('user', JSON.stringify({...user, image: data.data.image}))
                 rootState.message = 'Updated Successfully.'
                 setTimeout(() => {
                     rootState.message = null
                 }, 5000);
+                let user = JSON.parse(datastorage.getString('user'))
+                datastorage.setString('user', JSON.stringify({...state.user, token: user.token}))
             })
         }
     },

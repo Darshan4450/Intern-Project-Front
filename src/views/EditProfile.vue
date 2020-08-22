@@ -72,13 +72,17 @@ export default {
                   description: "Uploading " + name
               }
           var task = session.uploadFile(imgsrc, request);
+          let nsrc = ''
           task.on('error', (e) => console.log(e.response))
           task.on('responded', (e) => {
-            if(this.authuser.role === 'customer') {
-              this.updateUser({...this.user, image: JSON.parse(e.data)})
-            } else {
-              this.updateShop({...this.user, image: JSON.parse(e.data)})
-            }
+            nsrc = JSON.parse(e.data)
+          })
+          task.on('complete', (e) => {
+              if(this.authuser.role === 'customer') {
+                this.updateUser({...this.user, image: nsrc})
+              } else {
+                this.updateShop({...this.user, image: nsrc})
+              }
           })
         }
         else {

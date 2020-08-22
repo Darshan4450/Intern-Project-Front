@@ -41,10 +41,17 @@
             };
         },
         methods: {
-            ...mapActions(['register']),
+            ...mapActions(['register', 'login']),
             signUp() {
+                this.$store.state.loading = true
                 this.register(this.user)
-                this.$navigator.navigate('/login')
+                .then((data) => {
+                    this.login({email: this.user.email, password: this.user.password, role: this.user.role})
+                    .then((res) => {
+                        this.$store.state.loading = false
+                        this.$navigator.navigate('/dashboard')
+                    })
+                })
             }
         }
     };

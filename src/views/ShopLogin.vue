@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             user: {
-                phone: "1236547890",
-                password: "Darshan",
+                phone: "",
+                password: "",
                 role: "owner"
             }
         };

@@ -6,7 +6,8 @@
                 <Image class="w-6" src="~/assets/images/menu.png" @tap="$refs.drawer.toggleDrawerState()" />
                 <Label :text="'Hello '+user.name+'!'" class="text-lg bold"></Label>
                 <AbsoluteLayout>
-                    <Image class="w-8 mt-3 mr-2" src="~/assets/images/cart.png" @tap="goto('/cart')" />
+                    <Image v-if="user.role == 'owner'" class="w-8 mt-3 mr-2" src="~/assets/images/store.png" />
+                    <Image v-else class="w-8 mt-3 mr-2" src="~/assets/images/cart.png" @tap="goto('/cart')" />
                    <Label v-if="order.items.length > 0" :text="order.items.length" class="bg-gray-200 rounded-full py-0 px-1" top="5" left="15" isUserInteractionEnabled="false" />
                 </AbsoluteLayout>
             </FlexboxLayout>

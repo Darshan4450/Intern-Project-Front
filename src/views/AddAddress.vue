@@ -3,10 +3,10 @@
     <StackLayout style="margin-top:50">
       <Button text="Get Current Location" @tap="getLocation" />
       <Label :text="latitude" textWrap="true" />
-        <TextField hint="Address Line 1" :text="address.line1" />
-        <TextField hint="Address Line 2(Optional)" :text="address.line2" />
-        <TextField hint="City" :text="address.city" />
-        <TextField hint="Pincode" :text="address.pincode" />
+        <TextField hint="Address Line 1" v-model="address.line1" />
+        <TextField hint="Address Line 2(Optional)" v-model="address.line2" />
+        <TextField hint="City" v-model="address.city" />
+        <TextField hint="Pincode" v-model="address.pincode" />
         <Button text="Save Address" @tap="addNewAddress" class="success" />
     </StackLayout>
   </Page>
@@ -20,7 +20,7 @@ export default {
     data() {
         return {
             latitude: "",
-            address: { line1: "DA-IICT", line2: "Near Indroda Circle", city: "Gandhinagar", pincode: "382007" },
+            address: { line1: "", line2: "", city: "", pincode: "" },
         }
     },
     methods: {
