@@ -1,18 +1,26 @@
-# vue-native
+# Local Shop Aggregator
 
 ## Project setup
+
+### Nativescript Environment Setup
+See [CLI Setup Nativescript](https://docs.nativescript.org/angular/start/quick-setup)
+
+### Nativescript Configuration For Vue Js
+See [Nativescript And Vue Js](https://nativescript.org/vue/)
+
+### Installing Dependencies
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles for development
 ```
-npm run serve
+npm run serve:android
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+npm run build:android
 ```
 
 ### Customize configuration
