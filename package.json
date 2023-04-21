@@ -46,7 +46,7 @@
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
+    "@vue/cli-service": "~5.0.8",
     "babel-loader": "^8.0.6",
     "nativescript-dev-webpack": "^1.4.0",
     "nativescript-vue-template-compiler": "^2.5.0-alpha.3",
